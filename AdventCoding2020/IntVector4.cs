@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdventCoding2019
+namespace AdventCoding2020
 {
     class IntVector4 : IComparable
     {
