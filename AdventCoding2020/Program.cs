@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace AdventCoding2020
 {
     class Program
     {
+        [STAThreadAttribute]
         static void Main(string[] args)
         {
             int day = 25;
@@ -89,6 +87,7 @@ namespace AdventCoding2020
                         sw.Stop();
                         Console.WriteLine("Answer: " + answer);
                         Console.WriteLine("In: " + Convert.ToDouble(sw.ElapsedMilliseconds) / 1000 + "s");
+                        Clipboard.SetText(answer);
                     }
                     else
                     {
