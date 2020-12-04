@@ -79,6 +79,7 @@ namespace AdventCoding2020
                     count++;
                 }
                 location = IntVector2.Add(location, velocityVector);
+                location.X = location.X % (maxX+1);
                 if (location.X > maxX)
                 {
                     location.X -= (maxX + 1);
