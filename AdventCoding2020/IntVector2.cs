@@ -10,7 +10,23 @@ namespace AdventCoding2020
     {
         int x;
         int y;
-        internal static List<IntVector2> CardinalDirections = new List<IntVector2> { new IntVector2(0, -1), new IntVector2(-1, 0), new IntVector2(1, 0), new IntVector2(0, 1) };
+        internal static List<IntVector2> CardinalDirections = new List<IntVector2> {
+            new IntVector2(0, -1),
+            new IntVector2(-1, 0),
+            new IntVector2(1, 0),
+            new IntVector2(0, 1)
+        };
+        internal static List<IntVector2> CardinalDirectionsIncludingDiagonals = new List<IntVector2>
+        {
+            new IntVector2(-1,-1),
+            new IntVector2(-1, 0),
+            new IntVector2(-1, 1),
+            new IntVector2(0, -1),
+            new IntVector2(0, 1),
+            new IntVector2(1, -1),
+            new IntVector2(1, 0),
+            new IntVector2(1,1)
+        };
 
         public IntVector2(int x, int y)
         {
