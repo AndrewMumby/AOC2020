@@ -105,6 +105,21 @@ namespace AdventCoding2020
             return new IntVector2(vector1.x + vector2.x, vector1.y + vector2.y);
         }
 
+        internal IntVector2 Add(IntVector2 vector)
+        {
+            return IntVector2.Add(this, vector);
+        }
+
+        internal static IntVector2 Multiply(IntVector2 vector, int quantity)
+        {
+            return new IntVector2(vector.x * quantity, vector.y * quantity);
+        }
+
+        internal IntVector2 Multiply(int quantity)
+        {
+            return IntVector2.Multiply(this, quantity);
+        }
+
         public override int GetHashCode()
         {
             return x ^ y;
@@ -170,6 +185,15 @@ namespace AdventCoding2020
         internal IntVector2 West(int distance)
         {
             return new IntVector2(this.x - distance, this.y);
+        }
+
+        internal IntVector2 Left()
+        {
+            return new IntVector2(this.y, -this.x);
+        }
+        internal IntVector2 Right()
+        {
+            return new IntVector2(-this.y, this.x);
         }
 
         internal IntVector2 DirectionTo(IntVector2 target)
