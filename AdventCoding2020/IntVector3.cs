@@ -11,7 +11,48 @@ namespace AdventCoding2020
         int x;
         int y;
         int z;
-        internal static List<IntVector3> CardinalDirections = new List<IntVector3> { new IntVector3(0,0,1), new IntVector3(0, -1, 0), new IntVector3(-1, 0, 0), new IntVector3(1, 0, 0), new IntVector3(0, 1, 0), new IntVector3(0,0,1) };
+        internal static List<IntVector3> CardinalDirections = new List<IntVector3>
+        {
+            new IntVector3(0, 0, 1),
+            new IntVector3(0, -1, 0),
+            new IntVector3(-1, 0, 0),
+            new IntVector3(1, 0, 0),
+            new IntVector3(0, 1, 0),
+            new IntVector3(0, 0, 1)
+        };
+   
+        internal static List<IntVector3> CardinalDirectionsIncludingDiagonals = new List<IntVector3>
+        {
+            new IntVector3(-1,-1,-1),
+            new IntVector3(-1,-1, 0),
+            new IntVector3(-1, -1, 1),
+            new IntVector3(-1, 0, -1),
+            new IntVector3(-1, 0, 0),
+            new IntVector3(-1, 0, 1),
+            new IntVector3(-1, 1, -1),
+            new IntVector3(-1, 1, 0),
+            new IntVector3(-1, 1, 1),
+
+            new IntVector3(0,-1,-1),
+            new IntVector3(0,-1, 0),
+            new IntVector3(0, -1, 1),
+            new IntVector3(0, 0, -1),
+            new IntVector3(0, 0, 1),
+            new IntVector3(0, 1, -1),
+            new IntVector3(0, 1, 0),
+            new IntVector3(0, 1, 1),
+
+            new IntVector3(1,-1,-1),
+            new IntVector3(1,-1, 0),
+            new IntVector3(1, -1, 1),
+            new IntVector3(1, 0, -1),
+            new IntVector3(1, 0, 0),
+            new IntVector3(1, 0, 1),
+            new IntVector3(1, 1, -1),
+            new IntVector3(1, 1, 0),
+            new IntVector3(1, 1, 1),
+        };
+
 
         public IntVector3(int x, int y, int z)
         {
