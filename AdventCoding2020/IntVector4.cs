@@ -12,7 +12,112 @@ namespace AdventCoding2020
         int y;
         int z;
         int t;
-        internal static List<IntVector4> CardinalDirections = new List<IntVector4> {new IntVector4(0,0,0,-1), new IntVector4(0, 0, 1, 0), new IntVector4(0, -1, 0,0), new IntVector4(-1, 0, 0,0), new IntVector4(1, 0, 0,0), new IntVector4(0, 1, 0,0), new IntVector4(0, 0, 1,0), new IntVector4(0,0,0,1) };
+        internal static List<IntVector4> CardinalDirections = new List<IntVector4>
+        {
+            new IntVector4(0,0,0,-1),
+            new IntVector4(0, 0, -1, 0),
+            new IntVector4(0, -1, 0,0),
+            new IntVector4(-1, 0, 0,0),
+            new IntVector4(1, 0, 0,0),
+            new IntVector4(0, 1, 0,0),
+            new IntVector4(0, 0, 1,0),
+            new IntVector4(0,0,0,1)
+        };
+
+        internal static List<IntVector4> CardinalDirectionsIncludingDiagonals = new List<IntVector4>
+        {
+            new IntVector4(-1, -1,-1,-1),
+            new IntVector4(-1, -1,-1, 0),
+            new IntVector4(-1, -1, -1, 1),
+            new IntVector4(-1, -1, 0, -1),
+            new IntVector4(-1, -1, 0, 0),
+            new IntVector4(-1, -1, 0, 1),
+            new IntVector4(-1, -1, 1, -1),
+            new IntVector4(-1, -1, 1, 0),
+            new IntVector4(-1, -1, 1, 1),
+
+            new IntVector4(-1, 0,-1,-1),
+            new IntVector4(-1, 0,-1, 0),
+            new IntVector4(-1, 0, -1, 1),
+            new IntVector4(-1, 0, 0, -1),
+            new IntVector4(-1, 0, 0, 0),
+            new IntVector4(-1, 0, 0, 1),
+            new IntVector4(-1, 0, 1, -1),
+            new IntVector4(-1, 0, 1, 0),
+            new IntVector4(-1, 0, 1, 1),
+
+            new IntVector4(-1, 1,-1,-1),
+            new IntVector4(-1, 1,-1, 0),
+            new IntVector4(-1, 1, -1, 1),
+            new IntVector4(-1, 1, 0, -1),
+            new IntVector4(-1, 1, 0, 0),
+            new IntVector4(-1, 1, 0, 1),
+            new IntVector4(-1, 1, 1, -1),
+            new IntVector4(-1, 1, 1, 0),
+            new IntVector4(-1, 1, 1, 1),
+
+            new IntVector4(0, -1,-1,-1),
+            new IntVector4(0, -1,-1, 0),
+            new IntVector4(0, -1, -1, 1),
+            new IntVector4(0, -1, 0, -1),
+            new IntVector4(0, -1, 0, 0),
+            new IntVector4(0, -1, 0, 1),
+            new IntVector4(0, -1, 1, -1),
+            new IntVector4(0, -1, 1, 0),
+            new IntVector4(0, -1, 1, 1),
+
+            new IntVector4(0, 0,-1,-1),
+            new IntVector4(0, 0,-1, 0),
+            new IntVector4(0, 0, -1, 1),
+            new IntVector4(0, 0, 0, -1),
+            new IntVector4(0, 0, 0, 1),
+            new IntVector4(0, 0, 1, -1),
+            new IntVector4(0, 0, 1, 0),
+            new IntVector4(0, 0, 1, 1),
+
+            new IntVector4(0, 1,-1,-1),
+            new IntVector4(0, 1,-1, 0),
+            new IntVector4(0, 1, -1, 1),
+            new IntVector4(0, 1, 0, -1),
+            new IntVector4(0, 1, 0, 0),
+            new IntVector4(0, 1, 0, 1),
+            new IntVector4(0, 1, 1, -1),
+            new IntVector4(0, 1, 1, 0),
+            new IntVector4(0, 1, 1, 1),
+
+
+            new IntVector4(1, -1,-1,-1),
+            new IntVector4(1, -1,-1, 0),
+            new IntVector4(1, -1, -1, 1),
+            new IntVector4(1, -1, 0, -1),
+            new IntVector4(1, -1, 0, 0),
+            new IntVector4(1, -1, 0, 1),
+            new IntVector4(1, -1, 1, -1),
+            new IntVector4(1, -1, 1, 0),
+            new IntVector4(1, -1, 1, 1),
+
+            new IntVector4(1, 0,-1,-1),
+            new IntVector4(1, 0,-1, 0),
+            new IntVector4(1, 0, -1, 1),
+            new IntVector4(1, 0, 0, -1),
+            new IntVector4(1, 0, 0, 0),
+            new IntVector4(1, 0, 0, 1),
+            new IntVector4(1, 0, 1, -1),
+            new IntVector4(1, 0, 1, 0),
+            new IntVector4(1, 0, 1, 1),
+
+            new IntVector4(1, 1,-1,-1),
+            new IntVector4(1, 1,-1, 0),
+            new IntVector4(1, 1, -1, 1),
+            new IntVector4(1, 1, 0, -1),
+            new IntVector4(1, 1, 0, 0),
+            new IntVector4(1, 1, 0, 1),
+            new IntVector4(1, 1, 1, -1),
+            new IntVector4(1, 1, 1, 0),
+            new IntVector4(1, 1, 1, 1),
+
+        };
+
 
         public IntVector4(int x, int y, int z, int t)
         {
