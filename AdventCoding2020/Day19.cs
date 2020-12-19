@@ -73,41 +73,48 @@ namespace AdventCoding2020
 
             // what's the longest string?
             int longest = inputLines.Max(l => l.Length);
-
-            // Make loopy versions of 8 and 11 so that they're at least as long as longest
-
-            // Make loopy versions of the middle till it's longer than longest
-
-            // Gradually increase the size of first and last, pruning ones that don't match and ones that are too long till there's no new options
-
-            HashSet<string> eight = new HashSet<string>(solvedRules[42]);
-            HashSet<string> newSet = new HashSet<string>();
-
-            do
-            {
-                eight = new HashSet<string>(eight.Union(newSet));
-                newSet = new HashSet<string>();
-                foreach (string first in eight)
-                {
-                    foreach (string second in solvedRules[42])
-                    {
-                        string newString = first + second;
-                        if (newString.Length <= longest)
-                        {
-                            newSet.Add(first + second);
-                        }
-                    }
-                }
-            } while (newSet.Count > 0);
-
-
             int correct = 0;
+            int chunkSize = solvedRules[42].First().Length;
             foreach (string line in inputLines)
             {
-                if (validStrings.Contains(line))
+                // break it into chunks of chunkSize
+                string workingLine = line;
+                List<string> chunks = new List<string>();
+                while (workingLine.Length >0)
                 {
-
+                    chunks.Add(workingLine.Substring(0, chunkSize));
+                    workingLine = workingLine.Substring(chunkSize);
                 }
+
+                // Pattern is some 42s followed by some 31s
+                // There needs to be at least one more 42 than 31s
+                int count42 = 0;
+                int count31 = 0;
+                int i = 0;
+                while (i < chunks.Count && solvedRules[42].Contains(chunks[i]))
+                {
+                    i++;
+                    count42++;
+                    Console.Write("1");
+                }
+                while (i < chunks.Count && solvedRules[31].Contains(chunks[i]))
+                {
+                    i++;
+                    count31++;
+                    Console.Write("2");
+                }
+
+                Console.Write(" ");
+                if ((count42 > count31) && count31>0 && i == chunks.Count)
+                {
+                    Console.Write("PASS");
+                    correct++;
+                }
+                else
+                {
+                    Console.Write("FAIL");
+                }
+                Console.WriteLine(": " + line.Length + " " + line);
             }
             return correct.ToString();
         }
