@@ -24,7 +24,8 @@ namespace AdventCoding2020
         {
             ProcessInput(input);
             LockSectors();
-            DrawSectors();
+            //DrawSectors();
+            /*
             for (int y = -5; y <= 5; y++)
             {
                 for (int x = -5; x <= 5; x++)
@@ -40,7 +41,7 @@ namespace AdventCoding2020
                 }
                 Console.WriteLine();
             }
-
+            */
             // find the corners
             // first, find the north west corner
             long answer = 1;
