@@ -120,18 +120,19 @@ namespace AdventCoding2020
     internal class RecursiveCrabCards
     {
         List<Queue<int>> playerHands;
-        HashSet<string> previousHands;
+        Dictionary<int, List<List<List<int>>>> previousHands;
+        //HashSet<string> previousHands;
 
         public RecursiveCrabCards(string input)
         {
             FillHands(input);
-            previousHands = new HashSet<string>();
+            previousHands = new Dictionary<int, List<List<List<int>>>>();
         }
 
         public RecursiveCrabCards(List<Queue<int>> hands)
         {
             playerHands = hands;
-            previousHands = new HashSet<string>();
+            previousHands = new Dictionary<int, List<List<List<int>>>>();
         }
 
         private void FillHands(string input)
@@ -218,45 +219,76 @@ namespace AdventCoding2020
             }
 
         }
-
-        private Queue<int> CopyQueue(int player1Card, Queue<int> queue)
+        
+        private Queue<int> CopyQueue(int playerCard, Queue<int> queue)
         {
             List<int> list = new List<int>(queue);
             Queue<int> newQueue = new Queue<int>();
-            for (int i = 0; i < player1Card; i++)
+            for (int i = 0; i < playerCard; i++)
             {
                 newQueue.Enqueue(list[i]);
             }
             return newQueue;
         }
-
+        
         private bool CheckAndStoreHand()
         {
-            // Convert hand to string
-            StringBuilder handStringBuilder = new StringBuilder();
-            for (int p = 0; p < 2; p++)
+            // Get hashcode for current hand
+            List<List<int>> newHands = new List<List<int>>();
+            newHands.Add(playerHands[0].ToList());
+            newHands.Add(playerHands[1].ToList());
+            int hashCode = HandHashCode(newHands);
+            if (previousHands.ContainsKey(hashCode))
             {
-                for(int i = 0; i < playerHands[p].Count; i++)
+                foreach (List<List<int>> possible in previousHands[hashCode])
                 {
-                    List<int> listHand = playerHands[p].ToList();
-                    handStringBuilder.Append(listHand[i]);
+                    if (HandsMatch(newHands, possible))
+                    { return true; }
                 }
-                handStringBuilder.Append("/");
-            }
-            string handString = handStringBuilder.ToString();
-            // Check to see if string is present
-            if (previousHands.Contains(handString))
-            {
-                return true;
             }
             else
             {
-                // Store string
-                previousHands.Add(handString);
-                return false;
+                previousHands.Add(hashCode, new List<List<List<int>>>());
             }
+            // Store hand
+            previousHands[hashCode].Add(newHands);
+            return false;
         }
 
+        private bool HandsMatch(List<List<int>> newHands, List<List<int>> possible)
+        {
+            if (newHands[0].Count != possible[0].Count || newHands[1].Count != possible[1].Count)
+            {
+                return false;
+            }
+
+            for (int p = 0; p < 2; p++)
+            {
+                for (int i = 0; i < newHands[p].Count; i++)
+                {
+                    if (newHands[p][i] != possible[p][i])
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        private int HandHashCode(List<List<int>> hands)
+        {
+            int hashCode = 0;
+            int iterator = 1;
+            for (int p = 0; p < 2; p++)
+            {
+                foreach (int card in hands[p])
+                {
+                    hashCode = hashCode ^ card*iterator;
+                    iterator++;
+                }
+            }
+            return hashCode;
+        }
 
         internal int HighestScore()
         {
