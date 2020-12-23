@@ -8,82 +8,93 @@ namespace AdventCoding2020
 {
     class Day23
     {
+        static int maxCup;
         public static string A(string input)
         {
-            List<char> cups = ParseCups(input);
+            List<int> cups = ParseCups(input);
+            maxCup = cups.Max();
             for (int i = 0; i < 100; i++)
             {
                 cups = PlayRound(cups);
-                // Console.WriteLine(GetLabels(cups));
-                //Console.WriteLine(new string(cups.ToArray()));
             }
-            return GetLabels(cups);
+            return GetLabels(cups).ToString();
 
         }
 
-        private static string GetLabels(List<char> cups)
+        public static string B(string input)
         {
-            List<char> answer = new List<char>();
+            List<int> cups = ParseCups(input);
+            for (int i = cups.Max()+1; i <= 1000000; i++)
+            {
+                cups.Add(i);
+            }
+            maxCup = cups.Max();
+            for (int i = 0; i < 10000000; i++)
+            {
+                cups = PlayRound(cups);
+                if (i %10 == 0)
+                {
+                    Console.WriteLine(i);
+                }
+            }
+
+            int pos1 = cups.IndexOf(1);
+            return (cups[pos1 + 1] * cups[pos1 + 2]).ToString();
+        }
+
+        private static long GetLabels(List<int> cups)
+        {
+            long answer = 0;
             // find the 1
-            int onePos = cups.IndexOf('1');
+            int onePos = cups.IndexOf(1);
             int i = onePos + 1;
             while (i < cups.Count)
             {
-                answer.Add(cups[i]);
+                answer *= 10;
+                answer += cups[i];
                 i++;
             }
             i = 0;
             while (i < onePos)
             {
-                answer.Add(cups[i]);
+                answer *= 10;
+                answer += cups[i];
                 i++;
             }
-            return new string(answer.ToArray());
+            return answer;
         }
 
-        private static List<char> ParseCups(string input)
+        private static List<int> ParseCups(string input)
         {
-            List<char> cups = input.ToList();
-            return cups;
+            return input.Select(c => c - '0').ToList();
         }
 
-        private static List<char> PlayRound(List<char> cups)
+        private static List<int> PlayRound(List<int> cups)
         {
             // get current cup
-            char currentCup = cups[0];
-            //Console.WriteLine(currentCup);
+            int currentCup = cups[0];
 
             //get removed cups
-            List<char> removedCups = cups.GetRange(1, 3);
-            //Console.WriteLine(new string(removedCups.ToArray()));
+            List<int> removedCups = cups.GetRange(1, 3);
 
             // select destination cup
-            char destinationCup = (char)(currentCup - 1);
-            while (destinationCup <= '0' || removedCups.Contains(destinationCup))
+            int destinationCup = (currentCup - 1);
+            while (destinationCup <= 0 || removedCups.Contains(destinationCup))
             {
                 destinationCup--;
-                if (destinationCup <= '0')
+                if (destinationCup <= 0)
                 {
-                    destinationCup = '9';
+                    destinationCup = maxCup;
                 }
             }
 
-            // new order : <pack> <destinationCup> <removedCups> <pack> <currentCup>
-            int i = 4;
-            List<char> newCups = new List<char>();
-            while (i < 9)
-            {
-                if (cups[i] == destinationCup)
-                {
-                    newCups.Add(destinationCup);
-                    newCups.AddRange(removedCups);
-                }
-                else
-                {
-                    newCups.Add(cups[i]);
-                }
-                i++;
-            }
+            // new order : <4 - destinationCupPos-1> <destinationCup> <removedCups> <destinationCupPos+1 - end> <currentCup>
+            int destinationCupPos = cups.IndexOf(destinationCup);
+            List<int> newCups = new List<int>(10000000);
+            newCups.AddRange(cups.GetRange(4, destinationCupPos - 4));
+            newCups.Add(destinationCup);
+            newCups.AddRange(removedCups);
+            newCups.AddRange(cups.GetRange(destinationCupPos + 1, cups.Count - (destinationCupPos + 1)));
             newCups.Add(currentCup);
             return newCups;
         }
