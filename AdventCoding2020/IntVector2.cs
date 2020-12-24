@@ -47,6 +47,12 @@ namespace AdventCoding2020
             this.y = location.y;
         }
 
+        public IntVector2()
+        {
+            this.x = 0;
+            this.y = 0;
+        }
+
         public int X
         {
             get
