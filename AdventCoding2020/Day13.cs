@@ -56,40 +56,17 @@ namespace AdventCoding2020
             int busNo = 0;
             long interval = 1;
             long answer = 0;
-            while (busNo < busses.Count-1)
+            while (busNo < busses.Count)
             {
-                long firstNumber = 0;
-                long secondNumber = 0;
                 Tuple<int, int> testBus = busses[busNo];
-                while (firstNumber == 0)
-                {
-                    if (TestBus(answer, testBus))
-                    {
-                        firstNumber = answer;
-                    }
+                while (!TestBus(answer, testBus))
+                { 
                     answer += interval;
                 }
-                while (secondNumber == 0)
-                {
-                    if (TestBus(answer, testBus))
-                    {
-                        secondNumber = answer;
-                    }
-                    answer += interval;
-                }
-                answer -= interval;
                 interval = interval * testBus.Item1;
                 busNo++;
             }
-
-            while (true)
-            {
-                if (TestBus(answer, busses.Last()))
-                {
-                    return answer.ToString();
-                }
-                answer += interval;
-            }
+            return answer.ToString();
         }
 
         private static bool TestBus(long time, Tuple<int, int> bus)
