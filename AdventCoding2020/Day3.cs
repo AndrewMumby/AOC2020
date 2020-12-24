@@ -85,7 +85,6 @@ namespace AdventCoding2020
                     location.X -= (maxX + 1);
                 }
             }
-            Console.WriteLine(count);
             return count;
         }
     }

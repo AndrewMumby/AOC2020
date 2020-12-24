@@ -95,26 +95,20 @@ namespace AdventCoding2020
                 {
                     i++;
                     count42++;
-                    Console.Write("1");
                 }
                 while (i < chunks.Count && solvedRules[31].Contains(chunks[i]))
                 {
                     i++;
                     count31++;
-                    Console.Write("2");
                 }
 
-                Console.Write(" ");
                 if ((count42 > count31) && count31>0 && i == chunks.Count)
                 {
-                    Console.Write("PASS");
                     correct++;
                 }
                 else
                 {
-                    Console.Write("FAIL");
                 }
-                Console.WriteLine(": " + line.Length + " " + line);
             }
             return correct.ToString();
         }
