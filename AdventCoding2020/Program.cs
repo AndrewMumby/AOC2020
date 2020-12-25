@@ -53,7 +53,7 @@ namespace AdventCoding2020
                         sw.Start();
                         string answer = partMethod.Invoke(dayClass, new object[] { problem }).ToString();
                         sw.Stop();
-                        Console.Write("Answer: " + answer + " ");
+                        //Console.Write("Answer: " + answer + " ");
                         Console.WriteLine("In: " + Convert.ToDouble(sw.ElapsedMilliseconds) / 1000 + "s");
 
                         part = "B";
@@ -65,7 +65,7 @@ namespace AdventCoding2020
                         sw.Start();
                         answer = partMethod.Invoke(dayClass, new object[] { problem }).ToString();
                         sw.Stop();
-                        Console.Write("Answer: " + answer + " ");
+                        //Console.Write("Answer: " + answer + " ");
                         Console.WriteLine("In: " + Convert.ToDouble(sw.ElapsedMilliseconds) / 1000 + "s");
                     }
                     catch (Exception e)
